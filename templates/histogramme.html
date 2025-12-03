@@ -8,59 +8,51 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
    
     <script type="text/javascript">
-       
         google.charts.load('current', {'packages':['corechart']});
-       
- 
         google.charts.setOnLoadCallback(drawChart);
 
-       
         function drawChart() {
-           
             var data = google.visualization.arrayToDataTable([
-                ['Mois', 'Température (°C)', { role: 'style' }],  
-                ['Janvier',     5,  '#5470C6'],    
-                ['Février',     7,  '#91CC75'],      
-                ['Mars',        12, '#FAC858'],      
-                ['Avril',       16, '#EE6666'],    
-                ['Mai',         20, '#73C0DE'],      
-                ['Juin',        24, '#3BA272'],      
-                ['Juillet',     27, '#FC8452'],      
-                ['Août',        26, '#9A60B4'],      
-                ['Septembre',   22, '#EA7CCC'],    
-                ['Octobre',     17, '#5470C6'],      
-                ['Novembre',    11, '#91CC75'],      
-                ['Décembre',    6,  '#FAC858']      
+                ['Mois', 'Température (°C)', { role: 'style' }],
+                ['Janvier',     5,  '#5470C6'],
+                ['Février',     7,  '#91CC75'],
+                ['Mars',        12, '#FAC858'],
+                ['Avril',       16, '#EE6666'],
+                ['Mai',         20, '#73C0DE'],
+                ['Juin',        24, '#3BA272'],
+                ['Juillet',     27, '#FC8452'],
+                ['Août',        26, '#9A60B4'],
+                ['Septembre',   22, '#EA7CCC'],
+                ['Octobre',     17, '#5470C6'],
+                ['Novembre',    11, '#91CC75'],
+                ['Décembre',    6,  '#FAC858']
             ]);
 
-           
             var options = {
-                title: 'Évolution des températures à Tawarano',  
-                width: 1200,                                    
-                height: 600,                                      
-                legend: { position: 'none' },                    
-                hAxis: {                                        
+                title: 'Évolution des températures à Tawarano',
+                width: 1200,
+                height: 600,
+                legend: { position: 'none' },
+                hAxis: {
                     title: 'Mois',
-                    slantedText: true,                            
+                    slantedText: true,
                     slantedTextAngle: 45
                 },
-                vAxis: {                                      
+                vAxis: {
                     title: 'Température (°C)',
                     minValue: 0
                 },
-                bar: { groupWidth: '75%' },                  
-                chartArea: {                                    
+                bar: { groupWidth: '75%' },
+                chartArea: {
                     width: '80%',
                     height: '70%'
                 }
             };
 
-   
             var chart = new google.visualization.ColumnChart(
                 document.getElementById('chart_div')
             );
 
-     
             chart.draw(data, options);
         }
     </script>
@@ -99,5 +91,6 @@
 <body>
     <h1>Histogramme des températures - Tawarano</h1>
 
+    <div id="chart_div" style="width: 1200px; height: 600px; margin: 0 auto;"></div>
 </body>
 </html>
