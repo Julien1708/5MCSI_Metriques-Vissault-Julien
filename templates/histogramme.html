@@ -1,74 +1,103 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Évolution météo sur les 7 derniers jours</title>
-
-    <!-- Google Charts -->
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histogramme - Températures Tawarano</title>
+   
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+   
     <script type="text/javascript">
-      // On charge le package corechart
-      google.charts.load("current", { packages: ["corechart"] });
-      google.charts.setOnLoadCallback(drawChart);
+       
+        google.charts.load('current', {'packages':['corechart']});
+       
+ 
+        google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
-        // On récupère les données depuis ton endpoint Flask
-        fetch("/tawarano/")
-          .then((response) => response.json())
-          .then((json) => {
-            const results = json.results || [];
+       
+        function drawChart() {
+           
+            var data = google.visualization.arrayToDataTable([
+                ['Mois', 'Température (°C)', { role: 'style' }],  
+                ['Janvier',     5,  '#5470C6'],    
+                ['Février',     7,  '#91CC75'],      
+                ['Mars',        12, '#FAC858'],      
+                ['Avril',       16, '#EE6666'],    
+                ['Mai',         20, '#73C0DE'],      
+                ['Juin',        24, '#3BA272'],      
+                ['Juillet',     27, '#FC8452'],      
+                ['Août',        26, '#9A60B4'],      
+                ['Septembre',   22, '#EA7CCC'],    
+                ['Octobre',     17, '#5470C6'],      
+                ['Novembre',    11, '#91CC75'],      
+                ['Décembre',    6,  '#FAC858']      
+            ]);
 
-            const now = Date.now();
-            const sevenDaysAgo = now - 7 * 24 * 60 * 60 * 1000; // 7 jours en ms
+           
+            var options = {
+                title: 'Évolution des températures à Tawarano',  
+                width: 1200,                                    
+                height: 600,                                      
+                legend: { position: 'none' },                    
+                hAxis: {                                        
+                    title: 'Mois',
+                    slantedText: true,                            
+                    slantedTextAngle: 45
+                },
+                vAxis: {                                      
+                    title: 'Température (°C)',
+                    minValue: 0
+                },
+                bar: { groupWidth: '75%' },                  
+                chartArea: {                                    
+                    width: '80%',
+                    height: '70%'
+                }
+            };
 
-            // Regroupement par jour : { "YYYY-MM-DD": { sum: x, count: y, label: "lun. 02/12" } }
-            const perDay = {};
+   
+            var chart = new google.visualization.ColumnChart(
+                document.getElementById('chart_div')
+            );
 
-            results.forEach((item) => {
-              const timestampSeconds = item.Jour;
-              const temp = item.temp;
+     
+            chart.draw(data, options);
+        }
+    </script>
+   
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        #chart_div {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin: 20px auto;
+        }
+        p {
+            text-align: center;
+            margin-top: 20px;
+        }
+        a {
+            color: #4285F4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Histogramme des températures - Tawarano</h1>
 
-              const dtMs = timestampSeconds * 1000;
-              const dateObj = new Date(dtMs);
-
-              // On ne garde que les données des 7 derniers jours (passé récent)
-              if (dtMs < sevenDaysAgo || dtMs > now) {
-                return;
-              }
-
-              // Clé de jour au format YYYY-MM-DD
-              const year = dateObj.getFullYear();
-              const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-              const day = String(dateObj.getDate()).padStart(2, "0");
-              const dayKey = `${year}-${month}-${day}`;
-
-              if (!perDay[dayKey]) {
-                perDay[dayKey] = {
-                  sum: 0,
-                  count: 0,
-                  label: dateObj.toLocaleDateString("fr-FR", {
-                    weekday: "short",
-                    day: "2-digit",
-                    month: "2-digit",
-                  }),
-                };
-              }
-
-              perDay[dayKey].sum += temp;
-              perDay[dayKey].count += 1;
-            });
-
-            // On trie les jours dans l'ordre chronologique
-            const sortedKeys = Object.keys(perDay).sort();
-
-            // Construction du DataTable Google Charts
-            const data = new google.visualization.DataTable();
-            data.addColumn("string", "Jour");
-            data.addColumn("number", "Température moyenne (°C)");
-
-            sortedKeys.forEach((key) => {
-              const info = perDay[key];
-              const avgTemp = info.sum / info.count;
-              data.addRow([info.label, av]()
-
+</body>
+</html>
