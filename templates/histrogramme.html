@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Évolution météo sur les 7 derniers jours</title>
+
+    <!-- Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+      // On charge le package corechart
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        // On récupère les données depuis ton endpoint Flask
+        fetch("/tawarano/")
+          .then((response) => response.json())
+          .then((json) => {
+            const results = json.results || [];
+
+            const now = Date.now();
+            const sevenDaysAgo = now - 7 * 24 * 60 * 60 * 1000; // 7 jours en ms
+
+            // Regroupement par jour : { "YYYY-MM-DD": { sum: x, count: y, label: "lun. 02/12" } }
+            const perDay = {};
+
+            results.forEach((item) => {
+              const timestampSeconds = item.Jour;
+              const temp = item.temp;
+
+              const dtMs = timestampSeconds * 1000;
+              const dateObj = new Date(dtMs);
+
+              // On ne garde que les données des 7 derniers jours (passé récent)
+              if (dtMs < sevenDaysAgo || dtMs > now) {
+                return;
+              }
+
+              // Clé de jour au format YYYY-MM-DD
+              const year = dateObj.getFullYear();
+              const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+              const day = String(dateObj.getDate()).padStart(2, "0");
+              const dayKey = `${year}-${month}-${day}`;
+
+              if (!perDay[dayKey]) {
+                perDay[dayKey] = {
+                  sum: 0,
+                  count: 0,
+                  label: dateObj.toLocaleDateString("fr-FR", {
+                    weekday: "short",
+                    day: "2-digit",
+                    month: "2-digit",
+                  }),
+                };
+              }
+
+              perDay[dayKey].sum += temp;
+              perDay[dayKey].count += 1;
+            });
+
+            // On trie les jours dans l'ordre chronologique
+            const sortedKeys = Object.keys(perDay).sort();
+
+            // Construction du DataTable Google Charts
+            const data = new google.visualization.DataTable();
+            data.addColumn("string", "Jour");
+            data.addColumn("number", "Température moyenne (°C)");
+
+            sortedKeys.forEach((key) => {
+              const info = perDay[key];
+              const avgTemp = info.sum / info.count;
+              data.addRow([info.label, av]()
 
