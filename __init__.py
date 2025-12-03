@@ -37,7 +37,7 @@ def contact():
 
 
 # URL de l’API fournie dans l’énoncé
-GITHUB_COMMITS_URL = "https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits"
+GITHUB_COMMITS_URL = "https://api.github.com/repos/OpenRSI/5MCSI_Metriques-Vissault-Julien/commits"
 
 
 @app.route("/commits-data/")
