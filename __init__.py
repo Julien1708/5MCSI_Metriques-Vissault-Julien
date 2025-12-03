@@ -34,6 +34,26 @@ def mongraphique():
 @app.route("/histogramme/")
 def meteo_graph():
     return render_template("histogramme.html")
+
+@app.route("/contact", methods=["GET", "POST"])
+def contact():
+    if request.method == "POST":
+        nom = request.form.get("nom")
+        email = request.form.get("email")
+        telephone = request.form.get("telephone")
+        sujet = request.form.get("sujet")
+        message = request.form.get("message")
+
+        # Ici tu peux :
+        # - envoyer un mail
+        # - stocker en base
+        # - logger pour debug
+        print("Nouveau message de contact :", nom, email, telephone, sujet, message)
+
+        # Tu peux ensuite rediriger vers une page de confirmation
+        return redirect(url_for("contact"))
+
+    return render_template("contact.html")
   
 if __name__ == "__main__":
   app.run(debug=True)
