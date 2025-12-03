@@ -6,6 +6,8 @@ Cet atelier a pour objectif de vous apprendre à créer des graphiques (dans le 
 Vous allez créer des API, découvrir les Actions et les Secrets GitHUB pour au final mettre en service des bibliothèques graphiques.
 Large programme mais tout à fait accessible et ne nécessitant pas de base technique particulière. Juste de l'observation et de la rigueur dans votre travail.
 
+
+
 -------------------------------------------------------------------------------------------------------
 Séquence 1 : GitHUB -> Fait
 -------------------------------------------------------------------------------------------------------
