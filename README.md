@@ -7,7 +7,7 @@ Vous allez créer des API, découvrir les Actions et les Secrets GitHUB pour au 
 Large programme mais tout à fait accessible et ne nécessitant pas de base technique particulière. Juste de l'observation et de la rigueur dans votre travail.
 
 -------------------------------------------------------------------------------------------------------
-Séquence 1 : GitHUB
+Séquence 1 : GitHUB -> Fait
 -------------------------------------------------------------------------------------------------------
 Objectif : Création d'un Repository GitHUB pour travailler avec son projet  
 Difficulté : Très facile (~10 minutes)
@@ -30,7 +30,7 @@ Notion acquise lors de cette séquence :
 Vous avez appris lors de cette séquence à créer des Repository pour stocker et travailler avec votre code informatique. Vous pourez par la suite travailler en groupe sur un projet. Vous avez également appris à faire des Forks. C'est à dire, faire des copies de projets déjà existant dans GitHUB que vous pourrez ensuite adapter à vos besoins.
   
 ---------------------------------------------------
-Séquence 2 : Création d'un hébergement en ligne
+Séquence 2 : Création d'un hébergement en ligne -> Fait
 ---------------------------------------------------
 Objectif : Créer un hébergement sur Alawaysdata  
 Difficulté : Faible (~10 minutes)
@@ -62,7 +62,7 @@ Notions acquises lors de cette séquence :
 Vous avez créer un hébergement (gratuit) et découvert également que vous pouvez installer bien d'autres applications (Django, Drupal, Jenkins, Magento, Symphony, etc...). Les perspectives sont nombreuses.
 
 ---------------------------------------------------------------------------------------------
-Séquence 3 : Les Actions GitHUB (Industrialisation Continue)
+Séquence 3 : Les Actions GitHUB (Industrialisation Continue) -> Fait
 ---------------------------------------------------------------------------------------------
 Objectif : Automatiser la mise à jour de votre hébergement Alwaysdata  
 Difficulté : Moyenne (~15 minutes)
